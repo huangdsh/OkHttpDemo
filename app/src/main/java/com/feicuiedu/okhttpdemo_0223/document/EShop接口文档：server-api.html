@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>server-api</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<hr />
+<p>title: 接口文档
+sidebar: mydoc_sidebar
+permalink: server-api.html
+folder: mydoc/preparation</p>
+<h2>summary: 电商服务器接口文档</h2>
+<h2>文档说明</h2>
+<p>本文档是电商APP的服务器接口文档.</p>
+<p><strong>通用参数</strong>部分, 描述了统一的URL地址, 枚举参数和通用的JSON对象.</p>
+<h2>通用参数</h2>
+<h3>基础URL</h3>
+<ul>
+<li>接口基础URL: <code>http://106.14.32.204/eshop/emobile/?url=</code></li>
+<li>品牌LOGO图片基础URL: <code>http://106.14.32.204/eshop/data/brandlogo/</code></li>
+</ul>
+<h3>枚举参数</h3>
+<p><strong>错误码</strong></p>
+<ol>
+<li>成功: 0</li>
+<li>失败: 其它</li>
+</ol>
+<p><strong>排序方式</strong></p>
+<ol>
+<li>最贵: price_desc</li>
+<li>最便宜: price_asc</li>
+<li>最热: is_hot</li>
+</ol>
+<p><strong>规格类型</strong></p>
+<ol>
+<li>唯一: 0</li>
+<li>单选: 1</li>
+<li>多选: 2</li>
+</ol>
+<h3>通用JSON对象</h3>
+<p><strong>响应状态</strong></p>
+<pre><code>{   
+    &quot;succeed&quot;    : 1,                 // 是否成功( 1 代表成功)
+    &quot;error_code&quot; : 100,               // 错误代码
+    &quot;error_desc&quot; : &quot;Invalid session&quot;  // 错误描述
+}
+</code></pre>
+
+<p><strong>轮播图</strong></p>
+<pre><code>{
+    &quot;photo&quot;      : {图片对象},         // 图片
+    &quot;description&quot;: &quot;今天特价&quot;,         // 描述
+    &quot;url&quot;        : &quot;&quot;                 // 外链URL
+}
+</code></pre>
+
+<p><strong>图片</strong></p>
+<pre><code>{
+    &quot;small&quot;      : &quot;&quot;,                // 小图URL  
+    &quot;thumb&quot;      : &quot;&quot;,                // 中图URL
+    &quot;url&quot;        : &quot;&quot;                 // 大图URL
+}
+</code></pre>
+
+<p><strong>简单商品</strong></p>
+<pre><code>{
+    &quot;goods_id&quot;      : 32,            // 商品ID
+    &quot;name&quot;          : &quot;标题&quot;,        // 商品名称
+    &quot;market_price&quot;  : &quot;商场价格&quot;,    // 商场价格
+    &quot;shop_price&quot;    : &quot;商店价格&quot;,    // 商店价格
+    &quot;promote_price&quot; : &quot;促销价格&quot;,    // 促销价格
+    &quot;brief&quot;         : &quot;简要&quot;,        // 简要
+    &quot;img&quot;           : &quot;{图片对象}&quot;   // 图片
+}
+</code></pre>
+
+<p><strong>收藏的商品(继承简单商品的所有属性)</strong></p>
+<pre><code>{
+    &quot;rec_id&quot;        : 32             // 收藏id
+}
+</code></pre>
+
+<p><strong>商品分类</strong></p>
+<pre><code>{
+    &quot;id&quot;            : 1,              // 分类id
+    &quot;name&quot;          : &quot;鞋子&quot;,         // 分类名称
+    &quot;goods&quot;         : [{简单商品对象}] // 推荐商品
+}
+</code></pre>
+
+<p><strong>过滤器</strong></p>
+<pre><code>{
+    &quot;keywords&quot;      : &quot;关键词&quot;,          // 关键字
+    &quot;category_id&quot;   : 100,              // 分类id
+    &quot;price_range&quot;   : {价格区间},        // 价格区间
+    &quot;brand_id&quot;      : 1,                // 品牌id
+    &quot;sort_by&quot;       : &quot;id_desc&quot;         // 排序方式
+}
+</code></pre>
+
+<p><strong>价格区间</strong></p>
+<pre><code>{
+    &quot;price_min&quot;: 390,                 // 最小价格
+    &quot;price_max&quot;: 400                  // 最大价格
+}
+</code></pre>
+
+<p><strong>分页参数</strong></p>
+<pre><code>{
+    &quot;page&quot;       : 1,               // 页码
+    &quot;count&quot;      : 100                // 每页条数
+}
+</code></pre>
+
+<p><strong>分页结果</strong></p>
+<pre><code>{
+    &quot;total&quot;      : 100000,            // 总数
+    &quot;count&quot;      : 100,               // 返回条数
+    &quot;more&quot;       : 1                  // 是否还有更多 (1为是, 0为否)
+}
+</code></pre>
+
+<p><strong>品牌</strong></p>
+<pre><code>{
+    &quot;url&quot;         : &quot;1240803062307572427.gif&quot;, // 品牌LOGO
+    &quot;brand_name&quot;  : &quot;NOKIA&quot;,                   // 品牌名称
+    &quot;brand_id&quot;    : &quot;1&quot;                        // 品牌id
+}
+</code></pre>
+
+<p><strong>会话</strong></p>
+<pre><code>{
+    &quot;uid&quot;        : 1000,                    // 用户id
+    &quot;sid&quot;        : &quot;01234567890ABCDEF&quot;      // 会话id
+}
+</code></pre>
+
+<p><strong>商品详情</strong></p>
+<pre><code>{
+    &quot;id&quot;                    :  32,              // 商品id
+    &quot;collected&quot;             : 0,                // 是否收藏(1 - 是, 0 - 否)
+    &quot;cat_id&quot;                : 0,                // 所属分类id
+    &quot;goods_sn&quot;              : &quot;ECS000000&quot;,      // 商品序列号            
+    &quot;goods_name&quot;            : &quot;KD876&quot;           // 商品名称
+    &quot;market_price&quot;          : &quot;￥1786元&quot;,       // 商场价格
+    &quot;shop_price&quot;            : &quot;￥1488.00元&quot;,    // 商店价格
+    &quot;integral&quot;              : 1300,             // 积分
+    &quot;click_count&quot;           : 64,               // 点击次数
+    &quot;brand_id&quot;              : null,             // 品牌id
+    &quot;goods_number&quot;          : &quot;1&quot;,              // 商品数量
+    &quot;goods_weight&quot;          : &quot;110克&quot;,          // 商品重量
+    &quot;promote_price&quot;         : &quot;1455.00&quot;,        // 促销价格
+    &quot;formated_promote_price&quot;: &quot;￥1455.00元&quot;,    // 格式化促销价格
+    &quot;promote_start_date&quot;    : &quot;2016/11/13 16:00:00 +0800&quot;, // 促销开始时间
+    &quot;promote_end_date&quot;      : &quot;2016/11/22 16:00:00 +0800&quot;, // 促销结束时间
+    &quot;is_shipping&quot;           : 0,
+    &quot;img&quot;                   : {图片对象},
+    &quot;rank_prices&quot;           : [{会员价格对象}],
+    &quot;pictures&quot;              : [{图片对象}],
+    &quot;properties&quot;            : [{商品属性对象}],
+    &quot;specification&quot;         : [{商品规格对象}]
+}
+</code></pre>
+
+<p><strong>会员价格</strong></p>
+<pre><code>{
+    &quot;id&quot;                  :  1,               // 价格id
+    &quot;rank_name&quot;           : &quot;注册用户&quot;,        // 会员类型
+    &quot;price&quot;               : &quot;￥833元&quot;          // 价格
+}
+</code></pre>
+
+<p><strong>商品属性</strong></p>
+<pre><code>{
+    &quot;name&quot;       : &quot;属性名称&quot;,                 // key
+    &quot;value&quot;      : &quot;属性值&quot;                    // value
+}
+</code></pre>
+
+<p><strong>商品规格</strong></p>
+<pre><code>{
+    &quot;attr_type&quot;           : &quot;&lt;规格类型&gt;&quot;,      // 规格类型
+    &quot;name&quot;                : &quot;颜色&quot;,            // 规格名称
+    &quot;value&quot;               : [{商品价值对象}]   // 商品价值
+}
+</code></pre>
+
+<p><strong>商品价值</strong></p>
+<pre><code>{
+    &quot;id&quot;                 : 212,          // 价值id
+    &quot;label&quot;              : &quot;白色&quot;,       // 价值标签
+    &quot;price&quot;              : 0,            // 价格
+    &quot;format_price&quot;       : &quot;￥0.00元&quot;    // 格式化价格
+}
+</code></pre>
+
+<p><strong>用户</strong></p>
+<pre><code>{
+    &quot;! id&quot;            : 3,              // 用户id     
+    &quot;name&quot;            : &quot;tom&quot;,          // 用户名
+    &quot;rank_name&quot;       : &quot;VIP&quot;,          // 会员类型
+    &quot;rank_level&quot;      : &quot;0&quot;,            // 会员等级(0初级, 1其他)
+    &quot;collection_num&quot;  : 12,             // 收藏的商品数量
+    &quot;order_num&quot;       :
+    {
+        &quot;await_pay&quot;   : 1,
+        &quot;await_ship&quot;  : 2,
+        &quot;shipped&quot;     : 3,
+        &quot;finished&quot;    : 4
+    }
+}
+</code></pre>
+
+<p><strong>注册字段</strong></p>
+<pre><code>{
+    &quot;id&quot;              : 0,               // 字段id
+    &quot;name&quot;            : &quot;QQ&quot;,            // 字段名称
+    &quot;need&quot;            : 1                // 是否必要(1-是, 0-否)
+}
+</code></pre>
+
+<h2>首页商品浏览</h2>
+<h3>轮播图和促销商品</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /home/data</li>
+<li>请求方式: GET</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取首页的轮播图(首页主广告)和促销商品</p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/38612044.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...}, // 参见响应状态对象
+    &quot;data&quot;: {
+        &quot;player&quot;: [
+            {...} // 参见轮播图对象
+        ], 
+        &quot;promote_goods&quot;: [
+            {...} // 参见简单商品对象
+        ]
+    }
+}
+</code></pre>
+
+<h3>商品的一级分类和推荐</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /home/category</li>
+<li>请求方式: GET</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取商品的一级分类, 以及每个类型中的推荐商品.</p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/29356364.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;data&quot;: [ 
+        {...} // 参见商品分类对象
+    ], 
+    &quot;status&quot;: {...} // 参见响应状态对象
+}
+</code></pre>
+
+<h2>商品的分类和搜索</h2>
+<h3>搜索商品</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /search</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>搜索商品接口, 可按关键字, 商品分类, 价格区间, 商品品牌来搜索.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/41129108.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/91602362.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...}, // 参见响应状态对象
+    &quot;paginated&quot;: {...}, // 参见分页结果对象
+    &quot;data&quot;: [
+        {...} // 参见简单商品对象
+    ]
+}
+</code></pre>
+
+<h3>获取分类</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /category</li>
+<li>请求方式: GET</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取商品全部的分类和子分类信息.</p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/22017113.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;, 
+            &quot;name&quot;: &quot;手机类型&quot;, 
+            &quot;children&quot;: [
+                {
+                    &quot;id&quot;: &quot;3&quot;, 
+                    &quot;name&quot;: &quot;小型手机&quot;
+                }
+            ]
+        }
+    ], 
+    &quot;status&quot;: {
+        &quot;succeed&quot;: 1
+    }
+}
+</code></pre>
+
+<h3>获取品牌</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /brand</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取某类商品的所有品牌.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/71256759.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/99704154.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;data&quot;: [
+        {...} // 参见品牌对象
+    ], 
+    &quot;status&quot;: {...} // 参见响应状态对象
+}
+</code></pre>
+
+<h3>获取价格区间</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /price_range</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取某类型商品的价格区间.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/71256759.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/24753914.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;data&quot;: [ 
+        {...} // 参见价格区间对象
+    ], 
+    &quot;status&quot;: {...} //参见响应状态对象
+}
+</code></pre>
+
+<h2>商品详情与收藏</h2>
+<h3>商品详情</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /goods</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取商品详细信息</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/64865437.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-14/8761839.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;data&quot;: {...}, // 参见商品详情对象
+    &quot;status&quot;: {...} // 参见响应状态对象
+}
+</code></pre>
+
+<h3>商品描述</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /goods/desc</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取商品描述信息(html格式).</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/53350471.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/75394157.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...}, // 参见响应状态对象
+    &quot;data&quot;: &quot;&lt;html&gt;&lt;/html&gt;&quot;
+}
+</code></pre>
+
+<h3>收藏商品</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /user/collect/create</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>用户收藏商品.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/80369174.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/8652685.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...}, // 参见响应状态对象
+}
+</code></pre>
+
+<h3>取消收藏商品</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /user/collect/delete</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>用户取消收藏商品.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/53395731.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/52047049.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...}, // 参见响应状态对象
+}
+</code></pre>
+
+<h3>获取收藏列表</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /user/collect/list</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取用户收藏的商品的列表.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/61230941.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/75832469.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...},  // 参见响应状态对象
+    &quot;paginated&quot;: {...},  // 参见分页结果对象
+    &quot;data&quot;: [
+        {...} // 参见收藏的商品对象
+    ]
+}
+</code></pre>
+
+<h2>用户登录和注册</h2>
+<h3>用户登录</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /user/signin</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>用户登录.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/9366749.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/11201915.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...}, // 参见响应状态对象 
+    &quot;data&quot;: {
+        &quot;session&quot;: {...}, // 参见会话对象 
+        &quot;user&quot;: { } // 参见用户对象
+    }
+}
+</code></pre>
+
+<h3>获取注册字段</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /user/signupFields</li>
+<li>请求方式: GET</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取注册需要的字段.</p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/21802080.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;data&quot;: [
+        {...}, // 参见注册字段对象
+    ], 
+    &quot;status&quot;: {...} // 参见响应状态对象
+}
+</code></pre>
+
+<h3>用户注册</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /user/signup</li>
+<li>请求方式: GET</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>用户注册.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/21556727.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/2395857.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...},  // 参见响应状态对象
+    &quot;session&quot;: {...},  // 参见会话对象
+    &quot;user&quot;: {...} // 参见用户对象
+}
+</code></pre>
+
+<h3>获取用户信息</h3>
+<p><strong>基本信息</strong></p>
+<ul>
+<li>请求类型: HTTP</li>
+<li>接口地址: /user/signup</li>
+<li>请求方式: POST</li>
+<li>数据类型: X-WWW-FORM-URLENCODED</li>
+<li>响应类型: JSON</li>
+</ul>
+<p><strong>接口描述</strong></p>
+<p>获取用户信息.</p>
+<p><strong>请求参数</strong></p>
+<p>参数形式为<code>json=...</code>, 对应的JSON字符串格式为:</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/84310415.jpg" /></p>
+<p><strong>响应数据</strong></p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/public/16-11-15/67835324.jpg" /></p>
+<p><strong>响应示例</strong></p>
+<pre><code>{
+    &quot;status&quot;: {...},  // 参见响应状态对象
+    &quot;data&quot;: {...}  // 参见用户对象
+}
+</code></pre>
+
+<h2>接口问题记录</h2>
+<h3>没有修改用户头像的接口.</h3>
+<h3>取消收藏接口必须要收藏id, 导致在商品详情页面无法取消收藏.</h3>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

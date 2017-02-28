@@ -1,0 +1,11 @@
+1. 添加OkHttp依赖
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+2. 使用
+3. OkHttpClient单例的封装
+4. Call模型:
+    1. Call模型的概念：请求和响应
+    2. Call的取消：可以在任意线程中取消：call.cancel();
+5. 拦截器的功能：OkHttp的功能
+    拦截我们请求和响应信息并且打印出来：日志拦截器
+    1. 添加日志拦截器的依赖：logging-interceptor
+    2. 使用：设置给OkHttpClient
